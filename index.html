@@ -2,8 +2,62 @@
 <html>
 <head>
   <title>Genz Food Ajara</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero {
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      letter-spacing: 3px;
+      animation: slideUp 1.5s ease-out;
+    }
+
+    .location {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #aaa;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <h1>GENZ FOOD AJARA</h1>
+
+  <div class="hero">
+    <h1>GENZ FOOD AJARA</h1>
+    <div class="location">Ajara, Maharashtra</div>
+  </div>
+
 </body>
 </html>
