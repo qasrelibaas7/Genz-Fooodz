@@ -1,399 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Genz Food Ajara</title>
-<style>
-/* =========================
-   General Styles
-========================= */
-body{margin:0;font-family:Arial,sans-serif;background:#f9f9f9;color:#111;}
-h1,h2,h3,h4,h5,h6,p{margin:0;padding:0;}
-button{cursor:pointer;outline:none;}
-a{text-decoration:none;color:inherit;}
-/* =========================
-   Navbar
-========================= */
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.1);position:fixed;width:100%;top:0;z-index:1000;}
-.navbar .logo{font-size:20px;font-weight:bold;color:#ff4d4d;}
-.navbar .nav-right{display:flex;gap:15px;align-items:center;font-size:18px;}
-.navbar .icon{position:relative;}
-.navbar .cart-count{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:10px;padding:2px 6px;border-radius:50%;}
-/* =========================
-   Hero Section
-========================= */
-.hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#ff4d4d;color:#fff;padding-top:70px;animation:fadeIn 1.5s;}
-.hero h1{font-size:36px;margin-bottom:15px;animation:slideUp 1.2s;}
-.hero p{font-size:16px;margin-bottom:20px;}
-.order-btn{padding:12px 25px;background:#fff;color:#ff4d4d;border:none;border-radius:25px;font-size:16px;transition:0.3s;}
-.order-btn:hover{background:#ffe6e6;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
-/* =========================
-   Categories
-========================= */
-.categories{padding:20px;margin-top:20px;}
-.category{background:#fff;padding:20px;margin-bottom:15px;border-radius:12px;display:flex;align-items:center;gap:15px;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:0.3s;}
-.category:hover{background:#ffeded;}
-.category img{width:70px;height:70px;object-fit:cover;border-radius:10px;}
-.category span{font-size:18px;font-weight:bold;}
-
-/* =========================
-   Dishes Section
-========================= */
-.dishes-section{display:none;padding:20px;}
-.dish-card{background:#fff;padding:15px;margin-bottom:15px;border-radius:12px;display:flex;gap:15px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-.dish-card img{width:80px;height:80px;border-radius:12px;object-fit:cover;}
-.dish-info{flex:1;}
-.add-btn{padding:8px 15px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;font-weight:bold;transition:0.3s;}
-.add-btn:hover{background:#ff1a1a;}
-.back-btn{padding:8px 15px;background:#ff4d4d;border:none;border-radius:20px;color:#fff;margin-bottom:15px;transition:0.3s;}
-.back-btn:hover{background:#ff1a1a;}
-
-/* =========================
-   Cart Panel
-========================= */
-.cart-panel{display:none;position:fixed;right:0;top:0;height:100%;width:300px;background:#fff;padding:20px;overflow-y:auto;z-index:2000;box-shadow:-2px 0 5px rgba(0,0,0,0.2);}
-.cart-panel h3{margin-bottom:15px;}
-.cart-item{display:flex;justify-content:space-between;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:5px;}
-.close-cart{padding:8px 15px;background:#ff4d4d;border:none;color:#fff;border-radius:20px;margin-bottom:15px;transition:0.3s;}
-.close-cart:hover{background:#ff1a1a;}
-.payment-options{display:none;margin-top:15px;}
-.pay-btn{padding:8px 15px;margin-right:10px;border:none;border-radius:20px;color:#fff;background:#ff4d4d;font-weight:bold;transition:0.3s;}
-.pay-btn:hover{background:#ff1a1a;}
-
-/* =========================
-   Coupons
-========================= */
-.coupon-section{margin-top:15px;}
-.coupon-input{padding:8px;border-radius:10px;border:1px solid #ccc;width:60%;}
-.apply-btn{padding:8px 12px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;margin-left:5px;transition:0.3s;}
-.apply-btn:hover{background:#ff1a1a;}
-#couponMsg{margin-top:5px;font-size:14px;color:green;}
-
-/* =========================
-   Orders Section
-========================= */
-.orders-section{display:none;padding:20px;}
-.order-card{background:#fff;padding:10px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-
-/* =========================
-   Restaurants Slider
-========================= */
-.restaurant-slider{display:flex;overflow-x:auto;gap:15px;padding:10px 0;}
-.restaurant-slider::-webkit-scrollbar{display:none;}
-.restaurant-card{min-width:150px;background:#fff;padding:10px;border-radius:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);cursor:pointer;transition:0.3s;}
-.restaurant-card:hover{background:#ffeded;}
-.restaurant-card img{width:100%;height:100px;object-fit:cover;border-radius:10px;margin-bottom:8px;}
-
-/* =========================
-   Footer
-========================= */
-.footer{background:#fff;padding:20px;margin-top:30px;text-align:center;box-shadow:0 -2px 6px rgba(0,0,0,0.1);}
-.footer h3{margin-top:15px;margin-bottom:10px;}
-.store-btn{padding:10px 15px;margin:5px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;font-weight:bold;transition:0.3s;}
-.store-btn:hover{background:#ff1a1a;}
-.faq-item{background:#f5f5f5;padding:10px;margin:10px 0;border-radius:10px;cursor:pointer;transition:0.3s;}
-.faq-answer{display:none;margin-top:5px;color:#333;font-size:14px;}
-/* =========================
-   Login Modal
-========================= */
-.login-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:4000;justify-content:center;align-items:center;}
-.login-modal-content{background:#fff;color:#111;padding:20px;border-radius:15px;width:90%;max-width:400px;position:relative;}
-.login-modal-content input{width:100%;padding:10px;margin:10px 0;border-radius:10px;border:1px solid #ccc;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENZ FOOD | Ajara's Premium Delivery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .hero-gradient { background: linear-gradient(135deg, #FFEFBA 0%, #FFFFFF 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .animate-up { animation: slideUp 0.5s ease forwards; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<!-- Navbar -->
-<div class="navbar">
-  <div class="logo">GENZ FOOD</div>
-  <div class="nav-right">
-    <div>📍 Ajara</div>
-    <div class="icon" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></div>
-    <div class="icon" onclick="showOrders()">📄</div>
-    <div class="icon" onclick="openLogin()">👤</div>
-  </div>
-</div>
+    <nav class="fixed top-0 w-full z-50 glass border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-extrabold tracking-tighter text-orange-500">GENZ<span class="text-black">FOOD</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-1 text-sm font-medium text-gray-600">
+                <i data-lucide="map-pin" class="w-4 h-4 text-orange-500"></i> Ajara, Maharashtra
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSearch()" class="p-2 hover:bg-orange-50 rounded-full transition"><i data-lucide="search" class="w-6 h-6"></i></button>
+                <button onclick="toggleProfile()" class="p-2 hover:bg-orange-50 rounded-full transition"><i data-lucide="user" class="w-6 h-6"></i></button>
+                <button onclick="toggleCart()" class="relative p-2 bg-orange-500 text-white rounded-full shadow-lg shadow-orange-200">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-<!-- Hero -->
-<div class="hero">
-  <h1>GENZ FOOD AJARA</h1>
-  <p>Fast Delivery in Ajara</p>
-  <button class="order-btn" onclick="scrollToCategories()">Order Now</button>
-</div>
+    <section class="pt-24 pb-12 px-4 hero-gradient min-h-[80vh] flex flex-col items-center justify-center text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 animate-up tracking-tight">GENZ FOOD <span class="text-orange-500 text-outline">AJARA</span></h1>
+        <p class="text-lg text-gray-600 mb-8 animate-up" style="animation-delay: 0.1s;">The fastest cravings-solver in town. 🚀</p>
+        <div class="flex gap-3 animate-up" style="animation-delay: 0.2s;">
+            <button onclick="scrollToSection('categories')" class="bg-black text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:scale-105 transition">Order Now</button>
+            <button onclick="scrollToSection('restaurants')" class="bg-white text-black border border-gray-200 px-8 py-4 rounded-2xl font-bold shadow-sm hover:bg-gray-50 transition">Browse Kitchens</button>
+        </div>
+    </section>
 
-<!-- Categories -->
-<div class="categories" id="categories"></div>
+    <div id="search-bar" class="hidden px-4 mb-8 -mt-6 sticky top-20 z-40">
+        <input type="text" onkeyup="searchItems(this.value)" placeholder="Search for 'Pizza' or 'Burger'..." class="w-full max-w-2xl mx-auto block p-4 rounded-2xl border-none shadow-2xl focus:ring-2 focus:ring-orange-500 outline-none">
+    </div>
 
-<!-- Dishes Section -->
-<div class="dishes-section" id="dishesSection">
-  <button class="back-btn" onclick="goBack()">⬅ Back</button>
-  <h2 id="categoryTitle"></h2>
-  <div id="dishList"></div>
-  <div class="coupon-section">
-    <input type="text" placeholder="Enter coupon code" id="couponInput" class="coupon-input">
-    <button class="apply-btn" onclick="applyCoupon()">Apply</button>
-    <p id="couponMsg"></p>
-  </div>
-  <div class="payment-options" id="paymentOptions">
-    <h3>Select Payment Method:</h3>
-    <button class="pay-btn" onclick="payCOD()">Cash on Delivery</button>
-    <button class="pay-btn" onclick="payUPI()">UPI Payment</button>
-  </div>
-</div>
+    <main class="max-w-6xl mx-auto px-4 pb-24">
+        
+        <section id="restaurants" class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Top Restaurants</h2>
+                <span class="text-orange-500 text-sm font-bold">View all</span>
+            </div>
+            <div id="restaurant-list" class="flex gap-4 overflow-x-auto no-scrollbar pb-4">
+                </div>
+        </section>
 
-<!-- Cart Panel -->
-<div class="cart-panel" id="cartPanel">
-  <button class="close-cart" onclick="closeCart()">Close ✖</button>
-  <h3>My Cart</h3>
-  <div id="cartItems"></div>
-  <p>Total: ₹<span id="cartTotal">0</span></p>
-  <button class="order-btn" onclick="getLocation()">Proceed to Order</button>
-</div>
+        <section id="categories" class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Explore by Category</h2>
+            <div id="category-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+        </section>
 
-<!-- Orders Section -->
-<div class="orders-section" id="ordersSection">
-  <button class="back-btn" onclick="hideOrders()">⬅ Back</button>
-  <h2>My Orders</h2>
-  <div id="myOrdersList"></div>
-</div>
+        <section id="dishes-view" class="hidden mb-12 animate-up">
+            <div class="flex items-center gap-4 mb-6">
+                <button onclick="hideDishes()" class="p-2 bg-white rounded-xl shadow-sm"><i data-lucide="arrow-left"></i></button>
+                <h2 id="current-category-name" class="text-3xl font-bold">Menu</h2>
+            </div>
+            <div id="dishes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+        </section>
+    </main>
 
-<!-- Footer -->
-<div class="footer">
-  <button class="store-btn">Download on Play Store</button>
-  <button class="store-btn">Download on Apple Store</button>
-  <h3>FAQ</h3>
-  <div class="faq-item" onclick="toggleFAQ(this)">How long will delivery take?
-    <div class="faq-answer">Delivery usually takes 30-45 mins depending on location.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFAQ(this)">Can I cancel my order?
-    <div class="faq-answer">Yes, orders can be canceled within 5 minutes of placement.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFAQ(this)">Payment options?
-    <div class="faq-answer">Cash on Delivery or UPI payment.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFAQ(this)">Contact support?
-    <div class="faq-answer">WhatsApp us at +91 7385009275</div>
-  </div>
-</div>
+    <div id="cart-sidebar" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl p-6 flex flex-col">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold">Your Cart</h2>
+                <button onclick="toggleCart()"><i data-lucide="x"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar">
+                </div>
+            <div class="border-t pt-6 space-y-3">
+                <div class="flex gap-2">
+                    <input id="coupon-code" type="text" placeholder="Coupon: SAVE10" class="flex-1 p-3 bg-gray-100 rounded-xl outline-none text-sm">
+                    <button onclick="applyCoupon()" class="bg-black text-white px-4 rounded-xl text-sm font-bold">Apply</button>
+                </div>
+                <div class="flex justify-between text-gray-500"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
+                <div class="flex justify-between text-gray-500"><span>Delivery Fee</span><span id="cart-delivery">₹0</span></div>
+                <div class="flex justify-between text-xl font-extrabold text-orange-600"><span>Total</span><span id="cart-total">₹0</span></div>
+                
+                <select id="payment-method" class="w-full p-3 bg-gray-50 border rounded-xl text-sm mb-2">
+                    <option value="UPI">Pay via UPI</option>
+                    <option value="COD">Cash on Delivery</option>
+                </select>
+                
+                <button onclick="checkout()" class="w-full bg-orange-500 text-white py-4 rounded-2xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-100">Order via WhatsApp</button>
+            </div>
+        </div>
+    </div>
 
-<!-- Login Modal -->
-<div class="login-modal" id="loginModal">
-  <div class="login-modal-content">
-    <button onclick="closeLogin()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;">✖</button>
-    <h2>Login</h2>
-    <input type="text" id="loginName" placeholder="Your Name">
-    <input type="email" id="loginEmail" placeholder="Your Email">
-    <button class="order-btn" onclick="doLogin()">Login</button>
-    <p id="loginMsg" style="color:red;margin-top:10px;"></p>
-  </div>
-</div>
+    <div id="profile-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60" onclick="toggleProfile()"></div>
+        <div class="relative bg-white w-full max-w-md rounded-3xl p-8 animate-up">
+            <h2 class="text-2xl font-bold mb-6">Welcome Back!</h2>
+            <div id="user-info" class="space-y-4">
+                <input id="user-name" type="text" placeholder="Full Name" class="w-full p-4 bg-gray-50 rounded-2xl border-none ring-1 ring-gray-200">
+                <input id="user-email" type="email" placeholder="Email Address" class="w-full p-4 bg-gray-50 rounded-2xl border-none ring-1 ring-gray-200">
+                <button onclick="saveProfile()" class="w-full bg-black text-white py-4 rounded-2xl font-bold">Save & Continue</button>
+                <div class="relative py-4 text-center">
+                    <span class="bg-white px-4 text-gray-400 text-sm relative z-10">Or continue with</span>
+                    <hr class="absolute top-1/2 w-full border-gray-100">
+                </div>
+                <button class="w-full border border-gray-200 py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
+                    <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5"> Google
+                </button>
+            </div>
+            <div id="past-orders" class="mt-8 hidden">
+                <h3 class="font-bold mb-4">Past Orders</h3>
+                <div id="orders-list" class="space-y-3 max-h-48 overflow-y-auto no-scrollbar"></div>
+            </div>
+        </div>
+    </div>
 
-<script>
-// =========================
-// Data & Variables
-// =========================
-let cart=[]; let currentDiscount=0;
-const categories=["Pizza","Burger","Shawarma","Pasta","Salads","Sandwich","Chicken","Snacks","Beverages","Desserts"];
-const restaurants=[
-  {name:"Tasty Pizza",img:"images/rest1.jpg",categories:["Pizza","Beverages"]},
-  {name:"Burger Hub",img:"images/rest2.jpg",categories:["Burger","Snacks"]},
-  {name:"Shawarma King",img:"images/rest3.jpg",categories:["Shawarma","Beverages"]},
-  {name:"Pasta Palace",img:"images/rest4.jpg",categories:["Pasta","Desserts"]},
-  {name:"Healthy Salads",img:"images/rest5.jpg",categories:["Salads","Sandwich"]},
-  {name:"Chicken World",img:"images/rest6.jpg",categories:["Chicken","Snacks"]},
-  {name:"Dessert Corner",img:"images/rest7.jpg",categories:["Desserts","Beverages"]},
-  {name:"Snack Attack",img:"images/rest8.jpg",categories:["Snacks","Beverages"]},
-  {name:"Beverage Bar",img:"images/rest9.jpg",categories:["Beverages","Desserts"]},
-  {name:"Sandwich House",img:"images/rest10.jpg",categories:["Sandwich","Salads"]}
-];
+    <footer class="bg-white border-t border-gray-100 pt-16 pb-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <span class="text-3xl font-extrabold text-orange-500">GENZ FOOD</span>
+                    <p class="mt-4 text-gray-500 max-w-sm">Premium food delivery service exclusive to Ajara. Quality taste, lightning-fast delivery.</p>
+                    <div class="flex gap-4 mt-6">
+                        <button class="bg-black text-white px-4 py-2 rounded-lg text-xs flex items-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4"></i> App Store
+                        </button>
+                        <button class="bg-black text-white px-4 py-2 rounded-lg text-xs flex items-center gap-2">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i> Play Store
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="text-gray-500 space-y-2 text-sm">
+                        <li>Privacy Policy</li>
+                        <li>Terms of Service</li>
+                        <li>Refund Policy</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Support</h4>
+                    <button onclick="window.open('https://wa.me/917385009245')" class="flex items-center gap-2 text-green-600 font-bold">
+                        <i data-lucide="phone"></i> +91 7385009245
+                    </button>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-100 pt-8 mb-8">
+                <h4 class="font-bold mb-4">Frequently Asked Questions</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 rounded-xl"><p class="font-semibold text-sm">Delivery Time?</p><p class="text-xs text-gray-500">Usually 20-30 mins within Ajara.</p></div>
+                    <div class="p-4 bg-gray-50 rounded-xl"><p class="font-semibold text-sm">Delivery Charges?</p><p class="text-xs text-gray-500">Free under 1km, ₹20 extra after.</p></div>
+                </div>
+            </div>
+            <p class="text-center text-gray-400 text-sm">© 2026 GENZ FOOD AJARA. Crafted for the best.</p>
+        </div>
+    </footer>
 
-// =========================
-// Build Categories
-// =========================
-const categoriesDiv=document.getElementById("categories");
-categories.forEach(cat=>{
-  const div=document.createElement("div");
-  div.className="category";
-  div.innerHTML=`<span>${cat}</span>`;
-  div.onclick=()=>showCategory(cat);
-  categoriesDiv.appendChild(div);
-});
+    <script>
+        // --- DATA ---
+        const categories = [
+            { id: 1, name: 'Pizza', icon: 'pizza', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500' },
+            { id: 2, name: 'Burger', icon: 'sandwich', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500' },
+            { id: 3, name: 'Shawarma', icon: 'flame', img: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500' },
+            { id: 4, name: 'Pasta', icon: 'utensils', img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500' },
+            { id: 5, name: 'Salads', icon: 'leaf', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500' },
+            { id: 6, name: 'Sandwich', icon: 'layers', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500' },
+            { id: 7, name: 'Chicken', icon: 'drumstick', img: 'https://images.unsplash.com/photo-1562967914-608f82629710?w=500' },
+            { id: 8, name: 'Snacks', icon: 'cookie', img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bb087?w=500' },
+            { id: 9, name: 'Beverages', icon: 'cup-soda', img: 'https://images.unsplash.com/photo-1544145945-f904253d0c7b?w=500' },
+            { id: 10, name: 'Desserts', icon: 'ice-cream', img: 'https://images.unsplash.com/photo-1551024601-bec78acc704b?w=500' }
+        ];
 
-// =========================
-// Show Category Dishes
-// =========================
-function showCategory(name){
-  document.getElementById("categories").style.display="none";
-  document.getElementById("dishesSection").style.display="block";
-  document.getElementById("categoryTitle").innerText=name;
-  const dishList=document.getElementById("dishList");
-  dishList.innerHTML="";
-  document.getElementById("paymentOptions").style.display="none";
-  document.getElementById("couponMsg").innerText="";
-  for(let i=1;i<=10;i++){
-    dishList.innerHTML+=`<div class="dish-card">
-      <img src="images/${name.toLowerCase()}${i}.jpg" onerror="this.src='https://via.placeholder.com/80'">
-      <div class="dish-info"><h3>${name} ${i}</h3><p>Delicious ${name}</p><p>₹${100+i*10}</p></div>
-      <button class="add-btn" onclick="addToCart('${name} ${i}',${100+i*10})">Add</button>
-    </div>`;
-  }
-}
-function goBack(){document.getElementById("dishesSection").style.display="none";document.getElementById("categories").style.display="block";}
-function scrollToCategories(){document.getElementById("categories").scrollIntoView({behavior:"smooth"});}
+        const restaurants = [
+            { name: "Ajara Spice", cat: "Biryani & Tandoor", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400" },
+            { name: "The Burger Club", cat: "Burgers, Fries", img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400" },
+            { name: "Pizza Hut Ajara", cat: "Italian, Pizzas", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400" },
+            { name: "Royal Shawarma", cat: "Arabian Delight", img: "https://images.unsplash.com/photo-1662116765994-1e0e88966270?w=400" },
+            { name: "Sweet Tooth", cat: "Desserts, Cakes", img: "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400" }
+        ];
 
-// =========================
-// Cart Functions
-// =========================
-function addToCart(name,price){cart.push({name,price});updateCartUI();}
-function updateCartUI(){
-  document.getElementById("cartCount").innerText=cart.length;
-  const itemsDiv=document.getElementById("cartItems"); itemsDiv.innerHTML="";
-  let total=0; cart.forEach(item=>{itemsDiv.innerHTML+=`<div class="cart-item">${item.name} - ₹${item.price}</div>`; total+=item.price;});
-  document.getElementById("cartTotal").innerText=total-currentDiscount;
-}
-function openCart(){document.getElementById("cartPanel").style.display="block";}
-function closeCart(){document.getElementById("cartPanel").style.display="none";}
+        const dishes = [];
+        categories.forEach(cat => {
+            for(let i=1; i<=10; i++) {
+                dishes.push({
+                    id: `${cat.id}-${i}`,
+                    catId: cat.id,
+                    name: `${cat.name} Deluxe ${i}`,
+                    price: 150 + (i * 20),
+                    desc: "Authentic taste with fresh ingredients from Ajara farms.",
+                    img: cat.img
+                });
+            }
+        });
 
-// =========================
-// Coupon System
-// =========================
-const coupons={"GENZ10":10,"AJARA50":50};
-function applyCoupon(){
-  let code=document.getElementById("couponInput").value.trim().toUpperCase();
-  if(coupons[code]){currentDiscount=coupons[code]; document.getElementById("couponMsg").innerText=`Coupon applied! ₹${currentDiscount} off.`; updateCartUI();}
-  else{document.getElementById("couponMsg").innerText="Invalid coupon";}
-}
+        let cart = [];
+        let discount = 0;
 
-// =========================
-// Orders
-// =========================
-function showOrders(){
-  document.getElementById("categories").style.display="none";
-  document.getElementById("dishesSection").style.display="none";
-  document.getElementById("cartPanel").style.display="none";
-  document.getElementById("ordersSection").style.display="block";
-  displayOrders();
-}
-function hideOrders(){document.getElementById("ordersSection").style.display="none";document.getElementById("categories").style.display="block";}
-function displayOrders(){
-  let orders=JSON.parse(localStorage.getItem("myOrders")||"[]");
-  let container=document.getElementById("myOrdersList"); container.innerHTML="";
-  if(orders.length===0){container.innerHTML="<p>No orders yet.</p>"; return;}
-  orders.forEach((order,i)=>{container.innerHTML+=`<div class="order-card"><h4>Order #${i+1}</h4>${order.items.map(it=>it.name+" - ₹"+it.price).join("<br>")}<p>Total: ₹${order.total}</p><p>Payment: ${order.method}</p><p>Delivery Charge: ₹${order.delivery}</p></div>`;});
-}
+        // --- CORE FUNCTIONS ---
+        function init() {
+            renderRestaurants();
+            renderCategories();
+            updateCartCount();
+            lucide.createIcons();
+            loadProfile();
+        }
 
-// =========================
-// Payment + Location + WhatsApp
-// =========================
-function getLocation(){
-  if(navigator.geolocation){navigator.geolocation.getCurrentPosition(processLocation,locationError);}
-  else{alert("Location not supported");showPayment(0);}
-}
-function locationError(){alert("Location denied");showPayment(0);}
-function processLocation(pos){
-  let lat=pos.coords.latitude,lng=pos.coords.longitude;
-  let storeLat=16.3,storeLng=73.63;
-  let distance=getDistance(storeLat,storeLng,lat,lng);
-  let delivery=distance>1? Math.round((distance-1)*30):0;
-  showPayment(delivery,lat,lng);
-}
-function getDistance(lat1,lon1,lat2,lon2){
-  const R=6371; const dLat=(lat2-lat1)*Math.PI/180; const dLon=(lon2-lon1)*Math.PI/180;
-  const a=Math.sin(d
-  **2)** Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-}
+        function renderRestaurants() {
+            const list = document.getElementById('restaurant-list');
+            restaurants.forEach(res => {
+                list.innerHTML += `
+                    <div class="min-w-[280px] bg-white p-3 rounded-3xl card-shadow cursor-pointer hover:scale-[1.02] transition">
+                        <img src="${res.img}" class="w-full h-40 object-cover rounded-2xl mb-3">
+                        <h3 class="font-bold">${res.name}</h3>
+                        <p class="text-xs text-gray-400">${res.cat}</p>
+                    </div>
+                `;
+            });
+        }
 
-function showPayment(delivery,lat=0,lng=0){
-  window.currentDeliveryCharge=delivery; window.customerLat=lat; window.customerLng=lng;
-  document.getElementById("cartPanel").style.display="none";
-  document.getElementById("paymentOptions").style.display="block";
-}
-function payCOD(){placeOrder("COD");}
-function payUPI(){placeOrder("UPI");}
-function placeOrder(method){
-  let total=cart.reduce((sum,it)=>sum+it.price,0)+window.currentDeliveryCharge-currentDiscount;
-  let orders=JSON.parse(localStorage.getItem("myOrders")||"[]");
-  orders.push({items:cart,total,method,delivery:window.currentDeliveryCharge});
-  localStorage.setItem("myOrders",JSON.stringify(orders));
-  let msg=`Hello! Order via ${method}:\n`; 
-  cart.forEach(it=>msg+=`${it.name} - ₹${it.price}\n`);
-  msg+=`Delivery Charge: ₹${window.currentDeliveryCharge}\nTotal: ₹${total}\n`;
-  if(window.customerLat&&window.customerLng) msg+=`Location: https://maps.google.com/?q=${window.customerLat},${window.customerLng}`;
-  window.open(`https://wa.me/917385009275?text=${encodeURIComponent(msg)}`,"_blank");
-  alert("Order placed! Check WhatsApp.");
-  cart=[]; currentDiscount=0; updateCartUI(); document.getElementById("paymentOptions").style.display="none";
-}
+        function renderCategories() {
+            const list = document.getElementById('category-list');
+            categories.forEach(cat => {
+                list.innerHTML += `
+                    <div onclick="showDishes(${cat.id}, '${cat.name}')" class="relative overflow-hidden h-48 rounded-3xl cursor-pointer group shadow-sm">
+                        <img src="${cat.img}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                            <div>
+                                <h3 class="text-white text-2xl font-extrabold">${cat.name}</h3>
+                                <p class="text-orange-400 text-sm font-bold">Explore Menu <i data-lucide="chevron-right" class="inline w-4 h-4"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
 
-// =========================
-// FAQ Toggle
-// =========================
-function toggleFAQ(el){
-  let ans=el.querySelector(".faq-answer");
-  ans.style.display=(ans.style.display==="block"?"none":"block");
-}
+        function showDishes(catId, name) {
+            document.getElementById('categories').classList.add('hidden');
+            document.getElementById('restaurants').classList.add('hidden');
+            document.getElementById('dishes-view').classList.remove('hidden');
+            document.getElementById('current-category-name').innerText = name;
+            
+            const grid = document.getElementById('dishes-grid');
+            grid.innerHTML = '';
+            
+            dishes.filter(d => d.catId === catId).forEach(dish => {
+                grid.innerHTML += `
+                    <div class="bg-white p-4 rounded-3xl flex gap-4 card-shadow">
+                        <img src="${dish.img}" class="w-24 h-24 rounded-2xl object-cover">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg">${dish.name}</h4>
+                            <p class="text-gray-400 text-xs mb-2">${dish.desc}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-orange-600">₹${dish.price}</span>
+                                <button onclick="addToCart('${dish.id}')" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-bold">+ Add</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
 
-// =========================
-// Restaurants Slider & Show Restaurant
-// =========================
-const sliderDiv=document.createElement("div");
-sliderDiv.className="restaurant-slider";
-document.body.insertBefore(sliderDiv,document.getElementById("categories").nextSibling);
-restaurants.forEach((rest)=>{
-  let card=document.createElement("div");
-  card.className="restaurant-card";
-  card.innerHTML=`<img src="${rest.img}" onerror="this.src='https://via.placeholder.com/150'"><h4>${rest.name}</h4>`;
-  card.onclick=()=>showRestaurant(rest);
-  sliderDiv.appendChild(card);
-});
+        function hideDishes() {
+            document.getElementById('categories').classList.remove('hidden');
+            document.getElementById('restaurants').classList.remove('hidden');
+            document.getElementById('dishes-view').classList.add('hidden');
+        }
 
-function showRestaurant(rest){
-  document.getElementById("categories").style.display="none";
-  document.getElementById("dishesSection").style.display="block";
-  document.getElementById("categoryTitle").innerText=rest.name;
-  const dishList=document.getElementById("dishList");
-  dishList.innerHTML="";
-  document.getElementById("paymentOptions").style.display="none";
-  document.getElementById("couponMsg").innerText="";
-  rest.categories.forEach(cat=>{
-    for(let i=1;i<=5;i++){
-      let imgPath=`images/${cat.toLowerCase()}${i}.jpg`;
-      dishList.innerHTML+=`<div class="dish-card">
-        <img src="${imgPath}" onerror="this.src='https://via.placeholder.com/80'">
-        <div class="dish-info"><h3>${cat} ${i}</h3><p>Delicious ${cat}</p><p>₹${100+i*10}</p></div>
-        <button class="add-btn" onclick="addToCart('${cat} ${i}',${100+i*10})">Add</button>
-      </div>`;
-    }
-  });
-}
+        function addToCart(dishId) {
+            const dish = dishes.find(d => d.id === dishId);
+            const exists = cart.find(item => item.id === dishId);
+            if(exists) {
+                exists.qty++;
+            } else {
+                cart.push({...dish, qty: 1});
+            }
+            updateCart();
+            // Simple animation feedback
+            document.getElementById('cart-count').classList.add('scale-150');
+            setTimeout(() => document.getElementById('cart-count').classList.remove('scale-150'), 200);
+        }
 
-// =========================
-// Login Modal
-// =========================
-function openLogin(){document.getElementById("loginModal").style.display="flex";}
-function closeLogin(){document.getElementById("loginModal").style.display="none";}
-function doLogin(){
-  let name=document.getElementById("loginName").value.trim();
-  let email=document.getElementById("loginEmail").value.trim();
-  if(!name||!email){document.getElementById("loginMsg").innerText="Please enter name and email."; return;}
-  localStorage.setItem("user",JSON.stringify({name,email}));
-  alert(`Welcome, ${name}!`);
-  closeLogin();
-}
+        function updateCart() {
+            const list = document.getElementById('cart-items');
+            list.innerHTML = '';
+            let subtotal = 0;
 
-// =========================
-// Initialize
-// =========================
-function init(){
-  if(localStorage.getItem("user")){
-    console.log("User logged in:",JSON.parse(localStorage.getItem("user")).name);
-  }
-}
-init();
-</script>
-</body>
-</html>
+            cart.forEach(item => {
+                subtotal += (item.price * item.qty);
+                list.innerHTML += `
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-2xl">
+                        <div>
+                            <p class="font-bold text-sm">${item.name}</p>
+                            <p class="text-xs text-gray-400">₹${item.price} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="changeQty('${item.id}', -1)" class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">-</button>
+                            <span class="font-bold">${item.qty}</span>
+                            <button onclick="changeQty('${item.id}', 1)" class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const delivery = subtotal > 0 ? (subtotal > 500 ? 0 : 20) : 0;
+            const total = (subtotal - discount) + delivery;
+
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('cart-delivery').innerText = `₹${delivery}`;
+            document.getElementById('cart-total').innerText = `₹${total < 0 ? 0 : total}`;
+            updateCartCount();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            item.qty += delta;
+            if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            updateCart();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-count').innerText = count;
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-code').value.toUpperCase();
+            if(code === 'SAVE10') {
+           
