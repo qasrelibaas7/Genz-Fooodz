@@ -5,34 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Genz Food Ajara</title>
 <style>
-/* ===== Reset & Body ===== */
-body{margin:0;font-family:Arial,sans-serif;background:#fefefe;color:#111;scroll-behavior:smooth;}
-h1,h2,h3,h4,p{margin:0;padding:0;}
-button{cursor:pointer;outline:none;transition:0.3s;}
-
-/* ===== Navbar ===== */
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:fixed;width:100%;top:0;z-index:1000;}
-.logo{font-weight:bold;font-size:20px;color:#ff4d4d;}
-.nav-right{display:flex;align-items:center;gap:15px;font-size:16px;color:#111;}
-.icon{cursor:pointer;position:relative;font-size:20px;}
-.cart-count{position:absolute;top:-8px;right:-10px;background:red;color:white;font-size:12px;padding:2px 6px;border-radius:50%;}
-
-/* ===== Hero ===== */
-.hero{height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;flex-direction:column;margin-top:60px;animation:fadeIn 1.5s;}
-.hero h1{font-size:36px;color:#ff4d4d;margin-bottom:15px;animation:slideUp 1s ease forwards;}
-.hero button{padding:12px 25px;background:#ff4d4d;color:white;border:none;border-radius:25px;font-size:16px;}
-.hero button:hover{background:#ff1a1a;}
-
-/* ===== Categories ===== */
-.categories{padding:20px;display:flex;flex-direction:column;gap:15px;}
-.category{width:100%;padding:20px;background:#fff;border-radius:12px;display:flex;align-items:center;gap:15px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,0.1);transition:0.3s;}
-.category:hover{background:#ffeded;}
-.category img{width:80px;height:80px;object-fit:cover;border-radius:12px;}
-.category span{font-size:20px;flex:1;}
-
-/* ===== Animations ===== */
-@keyframes slideUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+/* =========================
+   General Styles
+========================= */
+body{margin:0;font-family:Arial,sans-serif;background:#f9f9f9;color:#111;}
+h1,h2,h3,h4,h5,h6,p{margin:0;padding:0;}
+button{cursor:pointer;outline:none;}
+a{text-decoration:none;color:inherit;}
+/* =========================
+   Navbar
+========================= */
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.1);position:fixed;width:100%;top:0;z-index:1000;}
+.navbar .logo{font-size:20px;font-weight:bold;color:#ff4d4d;}
+.navbar .nav-right{display:flex;gap:15px;align-items:center;font-size:18px;}
+.navbar .icon{position:relative;}
+.navbar .cart-count{position:absolute;top:-8px;right:-10px;background:red;color:#fff;font-size:10px;padding:2px 6px;border-radius:50%;}
+/* =========================
+   Hero Section
+========================= */
+.hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#ff4d4d;color:#fff;padding-top:70px;animation:fadeIn 1.5s;}
+.hero h1{font-size:36px;margin-bottom:15px;animation:slideUp 1.2s;}
+.hero p{font-size:16px;margin-bottom:20px;}
+.order-btn{padding:12px 25px;background:#fff;color:#ff4d4d;border:none;border-radius:25px;font-size:16px;transition:0.3s;}
+.order-btn:hover{background:#ffe6e6;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
+/* =========================
+   Categories
+========================= */
+.categories{padding:20px;margin-top:20px;}
+.category{background:#fff;padding:20px;margin-bottom:15px;border-radius:12px;display:flex;align-items:center;gap:15px;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:0.3s;}
+.category:hover{background:#ffeded;}
+.category img{width:70px;height:70px;object-fit:cover;border-radius:10px;}
+.category span{font-size:18px;font-weight:bold;}
+
+/* =========================
+   Dishes Section
+========================= */
+.dishes-section{display:none;padding:20px;}
+.dish-card{background:#fff;padding:15px;margin-bottom:15px;border-radius:12px;display:flex;gap:15px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.dish-card img{width:80px;height:80px;border-radius:12px;object-fit:cover;}
+.dish-info{flex:1;}
+.add-btn{padding:8px 15px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;font-weight:bold;transition:0.3s;}
+.add-btn:hover{background:#ff1a1a;}
+.back-btn{padding:8px 15px;background:#ff4d4d;border:none;border-radius:20px;color:#fff;margin-bottom:15px;transition:0.3s;}
+.back-btn:hover{background:#ff1a1a;}
+
+/* =========================
+   Cart Panel
+========================= */
+.cart-panel{display:none;position:fixed;right:0;top:0;height:100%;width:300px;background:#fff;padding:20px;overflow-y:auto;z-index:2000;box-shadow:-2px 0 5px rgba(0,0,0,0.2);}
+.cart-panel h3{margin-bottom:15px;}
+.cart-item{display:flex;justify-content:space-between;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:5px;}
+.close-cart{padding:8px 15px;background:#ff4d4d;border:none;color:#fff;border-radius:20px;margin-bottom:15px;transition:0.3s;}
+.close-cart:hover{background:#ff1a1a;}
+.payment-options{display:none;margin-top:15px;}
+.pay-btn{padding:8px 15px;margin-right:10px;border:none;border-radius:20px;color:#fff;background:#ff4d4d;font-weight:bold;transition:0.3s;}
+.pay-btn:hover{background:#ff1a1a;}
+
+/* =========================
+   Coupons
+========================= */
+.coupon-section{margin-top:15px;}
+.coupon-input{padding:8px;border-radius:10px;border:1px solid #ccc;width:60%;}
+.apply-btn{padding:8px 12px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;margin-left:5px;transition:0.3s;}
+.apply-btn:hover{background:#ff1a1a;}
+#couponMsg{margin-top:5px;font-size:14px;color:green;}
+
+/* =========================
+   Orders Section
+========================= */
+.orders-section{display:none;padding:20px;}
+.order-card{background:#fff;padding:10px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+
+/* =========================
+   Restaurants Slider
+========================= */
+.restaurant-slider{display:flex;overflow-x:auto;gap:15px;padding:10px 0;}
+.restaurant-slider::-webkit-scrollbar{display:none;}
+.restaurant-card{min-width:150px;background:#fff;padding:10px;border-radius:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);cursor:pointer;transition:0.3s;}
+.restaurant-card:hover{background:#ffeded;}
+.restaurant-card img{width:100%;height:100px;object-fit:cover;border-radius:10px;margin-bottom:8px;}
+
+/* =========================
+   Footer
+========================= */
+.footer{background:#fff;padding:20px;margin-top:30px;text-align:center;box-shadow:0 -2px 6px rgba(0,0,0,0.1);}
+.footer h3{margin-top:15px;margin-bottom:10px;}
+.store-btn{padding:10px 15px;margin:5px;border:none;border-radius:20px;background:#ff4d4d;color:#fff;font-weight:bold;transition:0.3s;}
+.store-btn:hover{background:#ff1a1a;}
+.faq-item{background:#f5f5f5;padding:10px;margin:10px 0;border-radius:10px;cursor:pointer;transition:0.3s;}
+.faq-answer{display:none;margin-top:5px;color:#333;font-size:14px;}
+/* =========================
+   Login Modal
+========================= */
+.login-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:4000;justify-content:center;align-items:center;}
+.login-modal-content{background:#fff;color:#111;padding:20px;border-radius:15px;width:90%;max-width:400px;position:relative;}
+.login-modal-content input{width:100%;padding:10px;margin:10px 0;border-radius:10px;border:1px solid #ccc;}
 </style>
 </head>
 <body>
@@ -43,31 +113,20 @@ button{cursor:pointer;outline:none;transition:0.3s;}
   <div class="nav-right">
     <div>📍 Ajara</div>
     <div class="icon" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></div>
-    <div class="icon" onclick="showProfile()">👤</div>
     <div class="icon" onclick="showOrders()">📄</div>
-    <div class="icon" onclick="showPolicies()">⚖️</div>
+    <div class="icon" onclick="openLogin()">👤</div>
   </div>
 </div>
 
 <!-- Hero -->
 <div class="hero">
   <h1>GENZ FOOD AJARA</h1>
-  <button onclick="scrollToCategories()">Order Now</button>
+  <p>Fast Delivery in Ajara</p>
+  <button class="order-btn" onclick="scrollToCategories()">Order Now</button>
 </div>
 
 <!-- Categories -->
-<div class="categories" id="categories">
-  <div class="category" onclick="showCategory('Pizza')"><span>🍕 Pizza</span></div>
-  <div class="category" onclick="showCategory('Burger')"><span>🍔 Burger</span></div>
-  <div class="category" onclick="showCategory('Shawarma')"><span>🌯 Shawarma</span></div>
-  <div class="category" onclick="showCategory('Pasta')"><span>🍝 Pasta</span></div>
-  <div class="category" onclick="showCategory('Salads')"><span>🥗 Salads</span></div>
-  <div class="category" onclick="showCategory('Sandwich')"><span>🥪 Sandwich</span></div>
-  <div class="category" onclick="showCategory('Chicken')"><span>🍗 Chicken</span></div>
-  <div class="category" onclick="showCategory('Snacks')"><span>🍟 Snacks</span></div>
-  <div class="category" onclick="showCategory('Beverages')"><span>🥤 Beverages</span></div>
-  <div class="category" onclick="showCategory('Desserts')"><span>🍰 Desserts</span></div>
-</div>
+<div class="categories" id="categories"></div>
 
 <!-- Dishes Section -->
 <div class="dishes-section" id="dishesSection">
@@ -75,7 +134,7 @@ button{cursor:pointer;outline:none;transition:0.3s;}
   <h2 id="categoryTitle"></h2>
   <div id="dishList"></div>
   <div class="coupon-section">
-    <input type="text" id="couponInput" class="coupon-input" placeholder="Enter coupon code">
+    <input type="text" placeholder="Enter coupon code" id="couponInput" class="coupon-input">
     <button class="apply-btn" onclick="applyCoupon()">Apply</button>
     <p id="couponMsg"></p>
   </div>
@@ -85,6 +144,7 @@ button{cursor:pointer;outline:none;transition:0.3s;}
     <button class="pay-btn" onclick="payUPI()">UPI Payment</button>
   </div>
 </div>
+
 <!-- Cart Panel -->
 <div class="cart-panel" id="cartPanel">
   <button class="close-cart" onclick="closeCart()">Close ✖</button>
@@ -101,163 +161,10 @@ button{cursor:pointer;outline:none;transition:0.3s;}
   <div id="myOrdersList"></div>
 </div>
 
-<!-- Restaurants Slider -->
-<div class="restaurants-section" style="padding:20px;">
-  <h2>Nearby Restaurants</h2>
-  <div class="restaurant-slider" style="display:flex;overflow-x:auto;gap:15px;padding:10px 0;"></div>
-</div>
-
-<script>
-let cart=[]; let currentDiscount=0;
-
-// Scroll to categories
-function scrollToCategories(){
-  document.getElementById("categories").scrollIntoView({behavior:"smooth"});
-}
-
-// Categories -> Dishes
-function showCategory(name){
-  document.getElementById("categories").style.display="none";
-  document.getElementById("dishesSection").style.display="block";
-  document.getElementById("categoryTitle").innerText=name;
-  document.getElementById("dishList").innerHTML="";
-  document.getElementById("paymentOptions").style.display="none";
-  document.getElementById("couponMsg").innerText="";
-
-  for(let i=1;i<=10;i++){
-    let imgPath=`images/${name.toLowerCase()}${i}.jpg`;
-    document.getElementById("dishList").innerHTML+=`
-      <div class="dish-card" style="display:flex;align-items:center;gap:15px;background:#fff;padding:15px;margin:10px 0;border-radius:12px;">
-        <img src="${imgPath}" style="width:80px;height:80px;object-fit:cover;border-radius:12px;">
-        <div style="flex:1;">
-          <h3>${name} ${i}</h3>
-          <p>Delicious ${name}</p>
-          <p>₹${100+i*10}</p>
-        </div>
-        <button class="add-btn" onclick="addToCart('${name} ${i}',${100+i*10})">Add</button>
-      </div>
-    `;
-  }
-}
-
-// Back to categories
-function goBack(){
-  document.getElementById("categories").style.display="flex";
-  document.getElementById("dishesSection").style.display="none";
-}
-
-// Cart functions
-function addToCart(name,price){
-  cart.push({name,price});
-  updateCartUI();
-}
-function updateCartUI(){
-  document.getElementById("cartCount").innerText=cart.length;
-  let itemsDiv=document.getElementById("cartItems"); itemsDiv.innerHTML="";
-  let total=0; 
-  cart.forEach(item=>{
-    itemsDiv.innerHTML+=`<div class="cart-item">${item.name} - ₹${item.price}</div>`;
-    total+=item.price;
-  });
-  document.getElementById("cartTotal").innerText=total-currentDiscount;
-}
-function openCart(){document.getElementById("cartPanel").style.display="block";}
-function closeCart(){document.getElementById("cartPanel").style.display="none";}
-
-// Coupons
-const coupons={"GENZ10":10,"AJARA50":50};
-function applyCoupon(){
-  let code=document.getElementById("couponInput").value.trim().toUpperCase();
-  if(coupons[code]){
-    currentDiscount=coupons[code]; 
-    document.getElementById("couponMsg").innerText=`Coupon applied! ₹${currentDiscount} off.`;
-    updateCartUI();
-  } else{
-    document.getElementById("couponMsg").innerText="Invalid coupon";
-  }
-}
-
-// Orders section
-function showOrders(){
-  document.getElementById("categories").style.display="none";
-  document.getElementById("dishesSection").style.display="none";
-  document.getElementById("cartPanel").style.display="none";
-  document.getElementById("ordersSection").style.display="block";
-  displayOrders();
-}
-function hideOrders(){
-  document.getElementById("ordersSection").style.display="none";
-  document.getElementById("categories").style.display="flex";
-}
-function displayOrders(){
-  let orders=JSON.parse(localStorage.getItem("myOrders")||"[]");
-  let container=document.getElementById("myOrdersList"); container.innerHTML="";
-  if(orders.length===0){container.innerHTML="<p>No orders yet.</p>"; return;}
-  orders.forEach((order,i)=>{
-    container.innerHTML+=`<div class="order-card" style="background:#fff;padding:15px;margin:10px 0;border-radius:12px;">
-      <h4>Order #${i+1}</h4>
-      ${order.items.map(it=>it.name+" - ₹"+it.price).join("<br>")}
-      <p>Total: ₹${order.total}</p>
-      <p>Payment: ${order.method}</p>
-      <p>Delivery Charge: ₹${order.delivery}</p>
-    </div>`;
-  });
-}
-
-// Restaurants slider
-const restaurants=[
-  {name:"Tasty Pizza",img:"images/rest1.jpg"},
-  {name:"Burger Hub",img:"images/rest2.jpg"},
-  {name:"Shawarma King",img:"images/rest3.jpg"},
-  {name:"Pasta Palace",img:"images/rest4.jpg"},
-  {name:"Healthy Salads",img:"images/rest5.jpg"},
-  {name:"Chicken World",img:"images/rest6.jpg"},
-  {name:"Dessert Corner",img:"images/rest7.jpg"},
-  {name:"Snack Attack",img:"images/rest8.jpg"},
-  {name:"Beverage Bar",img:"images/rest9.jpg"},
-  {name:"Sandwich House",img:"images/rest10.jpg"}
-];
-const sliderDiv=document.querySelector(".restaurant-slider");
-restaurants.forEach(rest=>{
-  let card=document.createElement("div");
-  card.className="restaurant-card";
-  card.style.minWidth="150px"; card.style.background="#fff"; card.style.padding="10px"; card.style.borderRadius="12px"; card.style.textAlign="center"; card.style.cursor="pointer"; card.style.marginRight="10px";
-  card.innerHTML=`<img src="${rest.img}" style="width:100%;height:100px;object-fit:cover;border-radius:12px;"><h4 style="font-size:14px;color:#111;">${rest.name}</h4>`;
-  card.onclick=()=>showCategory(rest.name);
-  sliderDiv.appendChild(card);
-});
-</script>
-<!-- Profile Modal -->
-<div class="profile-modal" id="profileModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:3000;justify-content:center;align-items:center;">
-  <div style="background:#fff;color:#111;padding:20px;border-radius:15px;width:90%;max-width:400px;position:relative;">
-    <button onclick="closeProfile()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;cursor:pointer;">✖</button>
-    <h2>My Profile</h2>
-    <p><strong>Name:</strong> John Doe</p>
-    <p><strong>Email:</strong> johndoe@example.com</p>
-    <p><strong>Phone:</strong> +91 7385009275</p>
-  </div>
-</div>
-
-<!-- Privacy Policy Modal -->
-<div class="policy-modal" id="policyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:3000;justify-content:center;align-items:center;">
-  <div style="background:#fff;color:#111;padding:20px;border-radius:15px;width:90%;max-width:500px;position:relative;overflow-y:auto;max-height:80%;">
-    <button onclick="closePolicy()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;cursor:pointer;">✖</button>
-    <h2>Privacy Policy</h2>
-    <p>This is a demo privacy policy for Genz Food Ajara. All customer data is kept confidential and will only be used for order processing and delivery purposes. No personal data will be shared with third parties without consent. By using our website, you agree to our policy.</p>
-    <p>We use secure payment gateways and WhatsApp notifications for order tracking. All transactions are encrypted. Customers can request deletion of data by contacting our support.</p>
-  </div>
-</div>
-
 <!-- Footer -->
-<div class="footer" style="background:#111;padding:20px;color:#fff;text-align:center;">
-  <div style="margin-bottom:15px;">
-    <button class="store-btn">Download on Play Store</button>
-    <button class="store-btn">Download on Apple Store</button>
-  </div>
-  <div style="margin-bottom:15px;">
-    <button onclick="openProfile()" class="store-btn">Profile</button>
-    <button onclick="openPolicy()" class="store-btn">Privacy Policy</button>
-  </div>
+<div class="footer">
+  <button class="store-btn">Download on Play Store</button>
+  <button class="store-btn">Download on Apple Store</button>
   <h3>FAQ</h3>
   <div class="faq-item" onclick="toggleFAQ(this)">How long will delivery take?
     <div class="faq-answer">Delivery usually takes 30-45 mins depending on location.</div>
@@ -273,103 +180,220 @@ restaurants.forEach(rest=>{
   </div>
 </div>
 
-<!-- Search -->
-<div style="padding:20px;text-align:center;">
-  <input type="text" id="searchInput" placeholder="Search for dishes or restaurants..." style="padding:10px;width:90%;max-width:400px;border-radius:25px;border:1px solid #ccc;">
-</div>
-
-<script>
-// Profile modal
-function openProfile(){document.getElementById("profileModal").style.display="flex";}
-function closeProfile(){document.getElementById("profileModal").style.display="none";}
-
-// Policy modal
-function openPolicy(){document.getElementById("policyModal").style.display="flex";}
-function closePolicy(){document.getElementById("policyModal").style.display="none";}
-
-// FAQ toggle (reuse)
-function toggleFAQ(el){let ans=el.querySelector(".faq-answer"); ans.style.display=(ans.style.display==="block"?"none":"block");}
-
-// Search function
-document.getElementById("searchInput").addEventListener("input", function(){
-  let val=this.value.toLowerCase();
-  // Search dishes
-  document.querySelectorAll(".dish-card").forEach(dc=>{
-    let text=dc.innerText.toLowerCase();
-    dc.style.display=text.includes(val)? "flex":"none";
-  });
-  // Search categories
-  document.querySelectorAll(".category").forEach(cat=>{
-    let text=cat.innerText.toLowerCase();
-    cat.parentElement.style.display=text.includes(val)? "flex":"none";
-  });
-});
-
-// Hero animation
-window.addEventListener("load", function(){
-  let hero=document.querySelector(".hero");
-  hero.style.opacity=0; hero.style.transform="translateY(50px)";
-  setTimeout(()=>{hero.style.transition="all 1s"; hero.style.opacity=1; hero.style.transform="translateY(0)";},100);
-});
-
-// Dish click animation
-document.querySelectorAll(".dish-card").forEach(dc=>{
-  dc.addEventListener("mouseenter",()=>{dc.style.transform="scale(1.03)"; dc.style.transition="0.3s";});
-  dc.addEventListener("mouseleave",()=>{dc.style.transform="scale(1)";});
-});
-
-// Category click animation
-document.querySelectorAll(".category").forEach(cat=>{
-  cat.addEventListener("mouseenter",()=>{cat.style.transform="scale(1.03)"; cat.style.transition="0.3s";});
-  cat.addEventListener("mouseleave",()=>{cat.style.transform="scale(1)";});
-});
-</script>
 <!-- Login Modal -->
-<div class="login-modal" id="loginModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:4000;justify-content:center;align-items:center;">
-  <div style="background:#fff;color:#111;padding:20px;border-radius:15px;width:90%;max-width:400px;position:relative;">
-    <button onclick="closeLogin()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;cursor:pointer;">✖</button>
+<div class="login-modal" id="loginModal">
+  <div class="login-modal-content">
+    <button onclick="closeLogin()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;">✖</button>
     <h2>Login</h2>
-    <input type="text" id="loginName" placeholder="Your Name" style="width:100%;padding:10px;margin:10px 0;border-radius:10px;border:1px solid #ccc;">
-    <input type="email" id="loginEmail" placeholder="Your Email" style="width:100%;padding:10px;margin:10px 0;border-radius:10px;border:1px solid #ccc;">
+    <input type="text" id="loginName" placeholder="Your Name">
+    <input type="email" id="loginEmail" placeholder="Your Email">
     <button class="order-btn" onclick="doLogin()">Login</button>
     <p id="loginMsg" style="color:red;margin-top:10px;"></p>
   </div>
 </div>
 
 <script>
-// Login modal functions
-function openLogin(){document.getElementById("loginModal").style.display="flex";}
-function closeLogin(){document.getElementById("loginModal").style.display="none";}
+// =========================
+// Data & Variables
+// =========================
+let cart=[]; let currentDiscount=0;
+const categories=["Pizza","Burger","Shawarma","Pasta","Salads","Sandwich","Chicken","Snacks","Beverages","Desserts"];
+const restaurants=[
+  {name:"Tasty Pizza",img:"images/rest1.jpg",categories:["Pizza","Beverages"]},
+  {name:"Burger Hub",img:"images/rest2.jpg",categories:["Burger","Snacks"]},
+  {name:"Shawarma King",img:"images/rest3.jpg",categories:["Shawarma","Beverages"]},
+  {name:"Pasta Palace",img:"images/rest4.jpg",categories:["Pasta","Desserts"]},
+  {name:"Healthy Salads",img:"images/rest5.jpg",categories:["Salads","Sandwich"]},
+  {name:"Chicken World",img:"images/rest6.jpg",categories:["Chicken","Snacks"]},
+  {name:"Dessert Corner",img:"images/rest7.jpg",categories:["Desserts","Beverages"]},
+  {name:"Snack Attack",img:"images/rest8.jpg",categories:["Snacks","Beverages"]},
+  {name:"Beverage Bar",img:"images/rest9.jpg",categories:["Beverages","Desserts"]},
+  {name:"Sandwich House",img:"images/rest10.jpg",categories:["Sandwich","Salads"]}
+];
 
-// Perform login
-function doLogin(){
-  const name=document.getElementById("loginName").value.trim();
-  const email=document.getElementById("loginEmail").value.trim();
-  if(name===""||email===""){document.getElementById("loginMsg").innerText="Please enter both fields."; return;}
-  const user={name,email};
-  localStorage.setItem("genzUser",JSON.stringify(user));
-  document.getElementById("loginMsg").innerText="Login successful!";
-  closeLogin();
-  updateProfileUI();
-}
+// =========================
+// Build Categories
+// =========================
+const categoriesDiv=document.getElementById("categories");
+categories.forEach(cat=>{
+  const div=document.createElement("div");
+  div.className="category";
+  div.innerHTML=`<span>${cat}</span>`;
+  div.onclick=()=>showCategory(cat);
+  categoriesDiv.appendChild(div);
+});
 
-// Update profile info after login
-function updateProfileUI(){
-  const user=JSON.parse(localStorage.getItem("genzUser"));
-  if(user){
-    document.querySelectorAll(".icon").forEach(ic=>{
-      if(ic.innerText==="👤") ic.title=`${user.name} (${user.email})`;
-    });
-    // update profile modal
-    const profileDiv=document.querySelector("#profileModal div");
-    profileDiv.innerHTML=`<button onclick="closeProfile()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:18px;cursor:pointer;">✖</button>
-      <h2>My Profile</h2>
-      <p><strong>Name:</strong> ${user.name}</p>
-      <p><strong>Email:</strong> ${user.email}</p>
-      <p><strong>Phone:</strong> +91 7385009275</p>`;
+// =========================
+// Show Category Dishes
+// =========================
+function showCategory(name){
+  document.getElementById("categories").style.display="none";
+  document.getElementById("dishesSection").style.display="block";
+  document.getElementById("categoryTitle").innerText=name;
+  const dishList=document.getElementById("dishList");
+  dishList.innerHTML="";
+  document.getElementById("paymentOptions").style.display="none";
+  document.getElementById("couponMsg").innerText="";
+  for(let i=1;i<=10;i++){
+    dishList.innerHTML+=`<div class="dish-card">
+      <img src="images/${name.toLowerCase()}${i}.jpg" onerror="this.src='https://via.placeholder.com/80'">
+      <div class="dish-info"><h3>${name} ${i}</h3><p>Delicious ${name}</p><p>₹${100+i*10}</p></div>
+      <button class="add-btn" onclick="addToCart('${name} ${i}',${100+i*10})">Add</button>
+    </div>`;
   }
 }
+function goBack(){document.getElementById("dishesSection").style.display="none";document.getElementById("categories").style.display="block";}
+function scrollToCategories(){document.getElementById("categories").scrollIntoView({behavior:"smooth"});}
 
-// Check login on page load
-window.addEventListener("load",()=>{updateProfileUI();});
+// =========================
+// Cart Functions
+// =========================
+function addToCart(name,price){cart.push({name,price});updateCartUI();}
+function updateCartUI(){
+  document.getElementById("cartCount").innerText=cart.length;
+  const itemsDiv=document.getElementById("cartItems"); itemsDiv.innerHTML="";
+  let total=0; cart.forEach(item=>{itemsDiv.innerHTML+=`<div class="cart-item">${item.name} - ₹${item.price}</div>`; total+=item.price;});
+  document.getElementById("cartTotal").innerText=total-currentDiscount;
+}
+function openCart(){document.getElementById("cartPanel").style.display="block";}
+function closeCart(){document.getElementById("cartPanel").style.display="none";}
+
+// =========================
+// Coupon System
+// =========================
+const coupons={"GENZ10":10,"AJARA50":50};
+function applyCoupon(){
+  let code=document.getElementById("couponInput").value.trim().toUpperCase();
+  if(coupons[code]){currentDiscount=coupons[code]; document.getElementById("couponMsg").innerText=`Coupon applied! ₹${currentDiscount} off.`; updateCartUI();}
+  else{document.getElementById("couponMsg").innerText="Invalid coupon";}
+}
+
+// =========================
+// Orders
+// =========================
+function showOrders(){
+  document.getElementById("categories").style.display="none";
+  document.getElementById("dishesSection").style.display="none";
+  document.getElementById("cartPanel").style.display="none";
+  document.getElementById("ordersSection").style.display="block";
+  displayOrders();
+}
+function hideOrders(){document.getElementById("ordersSection").style.display="none";document.getElementById("categories").style.display="block";}
+function displayOrders(){
+  let orders=JSON.parse(localStorage.getItem("myOrders")||"[]");
+  let container=document.getElementById("myOrdersList"); container.innerHTML="";
+  if(orders.length===0){container.innerHTML="<p>No orders yet.</p>"; return;}
+  orders.forEach((order,i)=>{container.innerHTML+=`<div class="order-card"><h4>Order #${i+1}</h4>${order.items.map(it=>it.name+" - ₹"+it.price).join("<br>")}<p>Total: ₹${order.total}</p><p>Payment: ${order.method}</p><p>Delivery Charge: ₹${order.delivery}</p></div>`;});
+}
+
+// =========================
+// Payment + Location + WhatsApp
+// =========================
+function getLocation(){
+  if(navigator.geolocation){navigator.geolocation.getCurrentPosition(processLocation,locationError);}
+  else{alert("Location not supported");showPayment(0);}
+}
+function locationError(){alert("Location denied");showPayment(0);}
+function processLocation(pos){
+  let lat=pos.coords.latitude,lng=pos.coords.longitude;
+  let storeLat=16.3,storeLng=73.63;
+  let distance=getDistance(storeLat,storeLng,lat,lng);
+  let delivery=distance>1? Math.round((distance-1)*30):0;
+  showPayment(delivery,lat,lng);
+}
+function getDistance(lat1,lon1,lat2,lon2){
+  const R=6371; const dLat=(lat2-lat1)*Math.PI/180; const dLon=(lon2-lon1)*Math.PI/180;
+  const a=Math.sin(d
+  **2)** Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+function showPayment(delivery,lat=0,lng=0){
+  window.currentDeliveryCharge=delivery; window.customerLat=lat; window.customerLng=lng;
+  document.getElementById("cartPanel").style.display="none";
+  document.getElementById("paymentOptions").style.display="block";
+}
+function payCOD(){placeOrder("COD");}
+function payUPI(){placeOrder("UPI");}
+function placeOrder(method){
+  let total=cart.reduce((sum,it)=>sum+it.price,0)+window.currentDeliveryCharge-currentDiscount;
+  let orders=JSON.parse(localStorage.getItem("myOrders")||"[]");
+  orders.push({items:cart,total,method,delivery:window.currentDeliveryCharge});
+  localStorage.setItem("myOrders",JSON.stringify(orders));
+  let msg=`Hello! Order via ${method}:\n`; 
+  cart.forEach(it=>msg+=`${it.name} - ₹${it.price}\n`);
+  msg+=`Delivery Charge: ₹${window.currentDeliveryCharge}\nTotal: ₹${total}\n`;
+  if(window.customerLat&&window.customerLng) msg+=`Location: https://maps.google.com/?q=${window.customerLat},${window.customerLng}`;
+  window.open(`https://wa.me/917385009275?text=${encodeURIComponent(msg)}`,"_blank");
+  alert("Order placed! Check WhatsApp.");
+  cart=[]; currentDiscount=0; updateCartUI(); document.getElementById("paymentOptions").style.display="none";
+}
+
+// =========================
+// FAQ Toggle
+// =========================
+function toggleFAQ(el){
+  let ans=el.querySelector(".faq-answer");
+  ans.style.display=(ans.style.display==="block"?"none":"block");
+}
+
+// =========================
+// Restaurants Slider & Show Restaurant
+// =========================
+const sliderDiv=document.createElement("div");
+sliderDiv.className="restaurant-slider";
+document.body.insertBefore(sliderDiv,document.getElementById("categories").nextSibling);
+restaurants.forEach((rest)=>{
+  let card=document.createElement("div");
+  card.className="restaurant-card";
+  card.innerHTML=`<img src="${rest.img}" onerror="this.src='https://via.placeholder.com/150'"><h4>${rest.name}</h4>`;
+  card.onclick=()=>showRestaurant(rest);
+  sliderDiv.appendChild(card);
+});
+
+function showRestaurant(rest){
+  document.getElementById("categories").style.display="none";
+  document.getElementById("dishesSection").style.display="block";
+  document.getElementById("categoryTitle").innerText=rest.name;
+  const dishList=document.getElementById("dishList");
+  dishList.innerHTML="";
+  document.getElementById("paymentOptions").style.display="none";
+  document.getElementById("couponMsg").innerText="";
+  rest.categories.forEach(cat=>{
+    for(let i=1;i<=5;i++){
+      let imgPath=`images/${cat.toLowerCase()}${i}.jpg`;
+      dishList.innerHTML+=`<div class="dish-card">
+        <img src="${imgPath}" onerror="this.src='https://via.placeholder.com/80'">
+        <div class="dish-info"><h3>${cat} ${i}</h3><p>Delicious ${cat}</p><p>₹${100+i*10}</p></div>
+        <button class="add-btn" onclick="addToCart('${cat} ${i}',${100+i*10})">Add</button>
+      </div>`;
+    }
+  });
+}
+
+// =========================
+// Login Modal
+// =========================
+function openLogin(){document.getElementById("loginModal").style.display="flex";}
+function closeLogin(){document.getElementById("loginModal").style.display="none";}
+function doLogin(){
+  let name=document.getElementById("loginName").value.trim();
+  let email=document.getElementById("loginEmail").value.trim();
+  if(!name||!email){document.getElementById("loginMsg").innerText="Please enter name and email."; return;}
+  localStorage.setItem("user",JSON.stringify({name,email}));
+  alert(`Welcome, ${name}!`);
+  closeLogin();
+}
+
+// =========================
+// Initialize
+// =========================
+function init(){
+  if(localStorage.getItem("user")){
+    console.log("User logged in:",JSON.parse(localStorage.getItem("user")).name);
+  }
+}
+init();
 </script>
+</body>
+</html>
