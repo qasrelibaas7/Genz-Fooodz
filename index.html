@@ -3,344 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GENZ FOOD | Ajara's Premium Delivery</title>
+    <title>GenZ Foods | The Ultimate Pro Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        .page { display: none; }
+        .page-active { display: block; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        /* Splash Screen */
+        #splash { position: fixed; inset: 0; background: #f97316; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s ease-in-out; }
+        .logo-anim { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        
+        .cat-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; }
+        .cat-img:active { transform: scale(0.9); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
-        .hero-gradient { background: linear-gradient(135deg, #FFEFBA 0%, #FFFFFF 100%); }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .animate-up { animation: slideUp 0.5s ease forwards; }
+        .hotel-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hotel-card:active { transform: scale(0.96); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-white text-gray-900 pb-24">
 
-    <nav class="fixed top-0 w-full z-50 glass border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl font-extrabold tracking-tighter text-orange-500">GENZ<span class="text-black">FOOD</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-1 text-sm font-medium text-gray-600">
-                <i data-lucide="map-pin" class="w-4 h-4 text-orange-500"></i> Ajara, Maharashtra
-            </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleSearch()" class="p-2 hover:bg-orange-50 rounded-full transition"><i data-lucide="search" class="w-6 h-6"></i></button>
-                <button onclick="toggleProfile()" class="p-2 hover:bg-orange-50 rounded-full transition"><i data-lucide="user" class="w-6 h-6"></i></button>
-                <button onclick="toggleCart()" class="relative p-2 bg-orange-500 text-white rounded-full shadow-lg shadow-orange-200">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
-                </button>
-            </div>
+    <div id="splash">
+        <div class="logo-anim text-white text-6xl font-black italic tracking-tighter">GenZ<span class="text-zinc-900">foods</span></div>
+        <div class="mt-6 flex gap-2">
+            <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
         </div>
-    </nav>
-
-    <section class="pt-24 pb-12 px-4 hero-gradient min-h-[80vh] flex flex-col items-center justify-center text-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 animate-up tracking-tight">GENZ FOOD <span class="text-orange-500 text-outline">AJARA</span></h1>
-        <p class="text-lg text-gray-600 mb-8 animate-up" style="animation-delay: 0.1s;">The fastest cravings-solver in town. 🚀</p>
-        <div class="flex gap-3 animate-up" style="animation-delay: 0.2s;">
-            <button onclick="scrollToSection('categories')" class="bg-black text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:scale-105 transition">Order Now</button>
-            <button onclick="scrollToSection('restaurants')" class="bg-white text-black border border-gray-200 px-8 py-4 rounded-2xl font-bold shadow-sm hover:bg-gray-50 transition">Browse Kitchens</button>
-        </div>
-    </section>
-
-    <div id="search-bar" class="hidden px-4 mb-8 -mt-6 sticky top-20 z-40">
-        <input type="text" onkeyup="searchItems(this.value)" placeholder="Search for 'Pizza' or 'Burger'..." class="w-full max-w-2xl mx-auto block p-4 rounded-2xl border-none shadow-2xl focus:ring-2 focus:ring-orange-500 outline-none">
+        <p class="text-white font-bold mt-4 uppercase text-[10px] tracking-[0.3em] opacity-80">Ajara's Premium Delivery</p>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 pb-24">
-        
-        <section id="restaurants" class="mb-12">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Top Restaurants</h2>
-                <span class="text-orange-500 text-sm font-bold">View all</span>
-            </div>
-            <div id="restaurant-list" class="flex gap-4 overflow-x-auto no-scrollbar pb-4">
-                </div>
-        </section>
-
-        <section id="categories" class="mb-12">
-            <h2 class="text-2xl font-bold mb-6">Explore by Category</h2>
-            <div id="category-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                </div>
-        </section>
-
-        <section id="dishes-view" class="hidden mb-12 animate-up">
-            <div class="flex items-center gap-4 mb-6">
-                <button onclick="hideDishes()" class="p-2 bg-white rounded-xl shadow-sm"><i data-lucide="arrow-left"></i></button>
-                <h2 id="current-category-name" class="text-3xl font-bold">Menu</h2>
-            </div>
-            <div id="dishes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                </div>
-        </section>
-    </main>
-
-    <div id="cart-sidebar" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleCart()"></div>
-        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl p-6 flex flex-col">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold">Your Cart</h2>
-                <button onclick="toggleCart()"><i data-lucide="x"></i></button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar">
-                </div>
-            <div class="border-t pt-6 space-y-3">
-                <div class="flex gap-2">
-                    <input id="coupon-code" type="text" placeholder="Coupon: SAVE10" class="flex-1 p-3 bg-gray-100 rounded-xl outline-none text-sm">
-                    <button onclick="applyCoupon()" class="bg-black text-white px-4 rounded-xl text-sm font-bold">Apply</button>
-                </div>
-                <div class="flex justify-between text-gray-500"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
-                <div class="flex justify-between text-gray-500"><span>Delivery Fee</span><span id="cart-delivery">₹0</span></div>
-                <div class="flex justify-between text-xl font-extrabold text-orange-600"><span>Total</span><span id="cart-total">₹0</span></div>
-                
-                <select id="payment-method" class="w-full p-3 bg-gray-50 border rounded-xl text-sm mb-2">
-                    <option value="UPI">Pay via UPI</option>
-                    <option value="COD">Cash on Delivery</option>
-                </select>
-                
-                <button onclick="checkout()" class="w-full bg-orange-500 text-white py-4 rounded-2xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-100">Order via WhatsApp</button>
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-[100] px-5 py-4 flex justify-between items-center border-b border-gray-100 shadow-sm">
+        <div class="flex items-center gap-4">
+            <i class="fas fa-bars text-xl cursor-pointer" onclick="toggleMenu()"></i>
+            <h1 class="text-xl font-black text-orange-500 italic uppercase tracking-tighter" onclick="showPage('home-page')">GenZ</h1>
+        </div>
+        <div class="flex items-center gap-5">
+            <div class="relative cursor-pointer" onclick="showPage('cart-page')">
+                <i class="fas fa-shopping-bag text-2xl"></i>
+                <span id="cart-badge" class="absolute -top-1 -right-1 bg-orange-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold border-2 border-white">0</span>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div id="profile-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/60" onclick="toggleProfile()"></div>
-        <div class="relative bg-white w-full max-w-md rounded-3xl p-8 animate-up">
-            <h2 class="text-2xl font-bold mb-6">Welcome Back!</h2>
-            <div id="user-info" class="space-y-4">
-                <input id="user-name" type="text" placeholder="Full Name" class="w-full p-4 bg-gray-50 rounded-2xl border-none ring-1 ring-gray-200">
-                <input id="user-email" type="email" placeholder="Email Address" class="w-full p-4 bg-gray-50 rounded-2xl border-none ring-1 ring-gray-200">
-                <button onclick="saveProfile()" class="w-full bg-black text-white py-4 rounded-2xl font-bold">Save & Continue</button>
-                <div class="relative py-4 text-center">
-                    <span class="bg-white px-4 text-gray-400 text-sm relative z-10">Or continue with</span>
-                    <hr class="absolute top-1/2 w-full border-gray-100">
-                </div>
-                <button class="w-full border border-gray-200 py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
-                    <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5"> Google
-                </button>
+    <div id="sidebar" class="fixed inset-0 bg-black/60 z-[200] hidden backdrop-blur-sm" onclick="toggleMenu()">
+        <div class="w-72 bg-white h-full p-8 shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl font-black text-orange-500 italic">GENZ MENU</h2>
+                <i class="fas fa-times text-gray-300" onclick="toggleMenu()"></i>
             </div>
-            <div id="past-orders" class="mt-8 hidden">
-                <h3 class="font-bold mb-4">Past Orders</h3>
-                <div id="orders-list" class="space-y-3 max-h-48 overflow-y-auto no-scrollbar"></div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-white border-t border-gray-100 pt-16 pb-8">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-2">
-                    <span class="text-3xl font-extrabold text-orange-500">GENZ FOOD</span>
-                    <p class="mt-4 text-gray-500 max-w-sm">Premium food delivery service exclusive to Ajara. Quality taste, lightning-fast delivery.</p>
-                    <div class="flex gap-4 mt-6">
-                        <button class="bg-black text-white px-4 py-2 rounded-lg text-xs flex items-center gap-2">
-                            <i data-lucide="play" class="w-4 h-4"></i> App Store
-                        </button>
-                        <button class="bg-black text-white px-4 py-2 rounded-lg text-xs flex items-center gap-2">
-                            <i data-lucide="smartphone" class="w-4 h-4"></i> Play Store
-                        </button>
+            <nav class="space-y-6 font-bold text-lg">
+                <div onclick="showPage('home-page')" class="flex items-center gap-4 text-orange-500"><i class="fas fa-home w-6"></i> Home</div>
+                <div onclick="showPage('cart-page')" class="flex items-center gap-4 hover:text-orange-500"><i class="fas fa-shopping-bag w-6"></i> My Bag</div>
+                <div class="border-t border-gray-100 my-4 pt-6">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-4">Support</p>
+                    <div class="space-y-6">
+                        <a href="https://wa.me/7385009275" class="flex items-center gap-4"><i class="fab fa-whatsapp w-6 text-green-500"></i> Help Center</a>
+                        <div onclick="showPage('home-page')" class="flex items-center gap-4"><i class="fas fa-info-circle w-6"></i> About Us</div>
                     </div>
                 </div>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <div id="home-page" class="page page-active">
+            <section class="p-4">
+                <div class="relative h-60 rounded-[2.5rem] overflow-hidden shadow-2xl bg-zinc-900 group">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" class="w-full h-full object-cover opacity-70">
+                    <div class="absolute inset-0 flex flex-col justify-center px-8 text-white">
+                        <h2 class="text-4xl font-black italic leading-none tracking-tighter">CRAVING<br>DHAMAKA?</h2>
+                        <p class="text-orange-400 font-bold uppercase text-[10px] mt-2 tracking-[0.2em]">Fastest Delivery In Ajara</p>
+                        <button onclick="document.getElementById('cat-heading').scrollIntoView()" class="mt-6 bg-orange-500 text-white w-40 py-3 rounded-full font-black text-[10px] uppercase shadow-lg active:scale-95 transition-all">Explore Menu</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="p-4">
+                <h3 id="cat-heading" class="text-xl font-black mb-6 italic uppercase tracking-tighter border-l-4 border-orange-500 pl-3">Top Categories</h3>
+                <div id="category-grid" class="flex gap-6 overflow-x-auto no-scrollbar pb-4"></div>
+            </section>
+
+            <section class="p-4">
+                <h3 class="text-xl font-black mb-6 italic uppercase tracking-tighter border-l-4 border-orange-500 pl-3">Featured Kitchens</h3>
+                <div id="hotel-list" class="space-y-10"></div>
+            </section>
+        </div>
+
+        <div id="dishes-page" class="page">
+            <div class="p-4 bg-white sticky top-[72px] z-50 border-b flex items-center gap-4">
+                <i class="fas fa-arrow-left text-orange-500 text-xl" onclick="showPage('home-page')"></i>
+                <h2 id="cat-title" class="font-black text-xl italic uppercase tracking-tighter">Menu</h2>
+            </div>
+            <div id="dishes-container" class="p-4 space-y-8 pb-20"></div>
+        </div>
+
+        <div id="cart-page" class="page p-6">
+            <h2 class="text-3xl font-black italic uppercase mb-8 tracking-tighter border-b-2 border-gray-100 pb-4">My Bag</h2>
+            <div id="cart-items" class="space-y-5"></div>
+            
+            <div id="empty-cart" class="text-center py-24 hidden">
+                <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shopping-basket text-4xl text-gray-200"></i>
+                </div>
+                <p class="text-gray-400 font-bold italic uppercase text-xs tracking-widest">Your bag is empty!</p>
+                <button onclick="showPage('home-page')" class="mt-6 bg-zinc-900 text-white px-8 py-3 rounded-full font-black uppercase text-[10px]">Add Items Now</button>
+            </div>
+
+            <div id="cart-summary" class="mt-10 pt-8 border-t border-dashed border-gray-300 hidden">
+                <div class="flex justify-between font-bold text-gray-500 mb-2 px-2 italic text-sm"><span>Subtotal</span> <span id="subtotal">₹0</span></div>
+                <div class="flex justify-between font-bold text-gray-500 mb-4 px-2 italic text-sm"><span>Delivery Fee</span> <span>₹20</span></div>
+                <div class="flex justify-between font-black text-3xl text-orange-600 italic px-2 tracking-tighter"><span>Grand Total</span> <span id="total-bill">₹0</span></div>
+                <button onclick="showPage('checkout-page')" class="w-full bg-orange-500 text-white py-5 rounded-[2rem] mt-10 font-black uppercase shadow-2xl shadow-orange-200 active:scale-95 transition-all">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <div id="checkout-page" class="page p-6">
+            <h2 class="text-2xl font-black italic uppercase mb-8 underline decoration-orange-500 underline-offset-8 decoration-4 tracking-tighter">Order Details</h2>
+            <div class="space-y-6">
                 <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="text-gray-500 space-y-2 text-sm">
-                        <li>Privacy Policy</li>
-                        <li>Terms of Service</li>
-                        <li>Refund Policy</li>
-                    </ul>
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-5 mb-2 block tracking-widest">Full Name</label>
+                    <input type="text" id="cust-name" placeholder="John Doe" class="w-full p-5 bg-gray-50 rounded-[2rem] font-bold border-none outline-none focus:ring-2 focus:ring-orange-500 shadow-inner">
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Support</h4>
-                    <button onclick="window.open('https://wa.me/917385009245')" class="flex items-center gap-2 text-green-600 font-bold">
-                        <i data-lucide="phone"></i> +91 7385009245
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-5 mb-2 block tracking-widest">WhatsApp Number</label>
+                    <input type="tel" id="cust-phone" placeholder="73850XXXXX" class="w-full p-5 bg-gray-50 rounded-[2rem] font-bold border-none outline-none focus:ring-2 focus:ring-orange-500 shadow-inner">
+                </div>
+                <div class="relative">
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-5 mb-2 block tracking-widest">Delivery Address</label>
+                    <textarea id="cust-address" placeholder="House No, Landmark, Ajara" class="w-full p-5 bg-gray-50 rounded-[2.5rem] font-bold border-none outline-none focus:ring-2 focus:ring-orange-500 h-40 shadow-inner"></textarea>
+                    <button onclick="getLiveLocation()" class="absolute bottom-4 right-4 bg-zinc-900 text-white px-5 py-2.5 rounded-2xl text-[9px] font-black uppercase flex items-center gap-2 shadow-xl active:scale-90 transition-all">
+                        <i class="fas fa-location-arrow text-orange-500"></i> Get Live Location
                     </button>
                 </div>
-            </div>
-            
-            <div class="border-t border-gray-100 pt-8 mb-8">
-                <h4 class="font-bold mb-4">Frequently Asked Questions</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-gray-50 rounded-xl"><p class="font-semibold text-sm">Delivery Time?</p><p class="text-xs text-gray-500">Usually 20-30 mins within Ajara.</p></div>
-                    <div class="p-4 bg-gray-50 rounded-xl"><p class="font-semibold text-sm">Delivery Charges?</p><p class="text-xs text-gray-500">Free under 1km, ₹20 extra after.</p></div>
+                
+                <div class="p-6 bg-orange-50 rounded-[2.5rem] border border-orange-100 shadow-sm">
+                    <p class="text-[10px] font-black uppercase text-orange-600 mb-4 tracking-[0.2em] text-center">Payment Selection</p>
+                    <div class="flex justify-around">
+                        <label class="font-black flex items-center gap-3 cursor-pointer text-xs italic"><input type="radio" name="pay" value="COD" checked class="w-5 h-5 accent-orange-600"> CASH</label>
+                        <label class="font-black flex items-center gap-3 cursor-pointer text-xs italic"><input type="radio" name="pay" value="UPI" class="w-5 h-5 accent-orange-600"> UPI</label>
+                    </div>
+                    <p class="text-[9px] mt-5 font-bold text-gray-400 italic text-center border-t border-orange-200/50 pt-3">UPI ID: 7385009275@fam</p>
                 </div>
+                
+                <button onclick="placeOrder()" class="w-full bg-zinc-900 text-white py-5 rounded-[2.5rem] font-black uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all text-sm">Confirm & Order Now</button>
             </div>
-            <p class="text-center text-gray-400 text-sm">© 2026 GENZ FOOD AJARA. Crafted for the best.</p>
+        </div>
+
+        <div id="success-page" class="page p-10 text-center pt-24">
+            <div class="w-28 h-28 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-10 text-5xl shadow-2xl animate-bounce shadow-green-200">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter text-zinc-900">Order Confirmed!</h2>
+            <p class="text-orange-500 font-black italic mt-3 text-lg">Check WhatsApp For Receipt</p>
+            <div class="mt-10 p-6 bg-gray-50 rounded-[2rem] border-2 border-dashed border-gray-200">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Status</p>
+                <p class="text-xl font-black italic text-zinc-800">PREPARING YOUR FOOD...</p>
+            </div>
+            <button onclick="location.reload()" class="mt-12 bg-zinc-900 text-white px-12 py-5 rounded-full font-black uppercase text-xs tracking-[0.3em] shadow-xl">Continue Shopping</button>
+        </div>
+    </main>
+
+    <footer class="bg-zinc-950 text-white mt-12 rounded-t-[4rem] pt-20 pb-32 px-8">
+        <div class="max-w-md mx-auto mb-16 space-y-4">
+            <h3 class="text-xl font-black italic text-orange-500 mb-8 text-center uppercase tracking-tighter">Got Questions?</h3>
+            <details class="group bg-zinc-900 rounded-[2rem] border border-white/5 overflow-hidden shadow-lg transition-all">
+                <summary class="list-none p-6 flex justify-between items-center cursor-pointer font-black text-[10px] uppercase italic tracking-widest">How it works? <i class="fas fa-plus text-orange-500 group-open:rotate-45 transition-transform"></i></summary>
+                <p class="px-6 pb-6 text-[10px] text-gray-400 font-medium italic leading-relaxed">Select your favorite dish, add it to your bag, provide delivery details, and confirm the order via WhatsApp. We handle the rest!</p>
+            </details>
+            <details class="group bg-zinc-900 rounded-[2rem] border border-white/5 overflow-hidden shadow-lg transition-all">
+                <summary class="list-none p-6 flex justify-between items-center cursor-pointer font-black text-[10px] uppercase italic tracking-widest">Delivery Time? <i class="fas fa-plus text-orange-500 group-open:rotate-45 transition-transform"></i></summary>
+                <p class="px-6 pb-6 text-[10px] text-gray-400 font-medium italic leading-relaxed">Usually between 25-40 minutes depending on your location in Ajara.</p>
+            </details>
+            <details class="group bg-zinc-900 rounded-[2rem] border border-white/5 overflow-hidden shadow-lg transition-all">
+                <summary class="list-none p-6 flex justify-between items-center cursor-pointer font-black text-[10px] uppercase italic tracking-widest">Payment? <i class="fas fa-plus text-orange-500 group-open:rotate-45 transition-transform"></i></summary>
+                <p class="px-6 pb-6 text-[10px] text-gray-400 font-medium italic leading-relaxed">We support Cash on Delivery and UPI (7385009275@fam).</p>
+            </details>
+        </div>
+
+        <div class="text-center space-y-12">
+            <div class="flex justify-center gap-10 text-2xl text-orange-500">
+                <a href="#" class="hover:scale-125 transition-transform"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:scale-125 transition-transform"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/7385009275" class="text-green-500 hover:scale-125 transition-transform"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="text-white/40 hover:scale-125 transition-transform"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="pt-10 border-t border-white/5">
+                <h2 class="text-3xl font-black italic text-orange-500 uppercase tracking-tighter">GenZ<span class="text-white">foods</span></h2>
+                <p class="text-[9px] font-bold mt-2 uppercase opacity-30 tracking-[0.5em]">The Taste of Ajara • 2026</p>
+            </div>
         </div>
     </footer>
 
+    <nav class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-lg border-t p-5 flex justify-around items-center z-[150] shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-[2.5rem]">
+        <div onclick="showPage('home-page')" class="flex flex-col items-center cursor-pointer transition-all active:scale-90">
+            <i class="fas fa-home text-orange-500 text-xl"></i>
+            <span class="text-[9px] font-black uppercase mt-1 tracking-tighter">Home</span>
+        </div>
+        <div onclick="showPage('cart-page')" class="flex flex-col items-center cursor-pointer relative transition-all active:scale-90">
+            <i class="fas fa-shopping-bag text-gray-300 text-xl" id="nav-bag-icon"></i>
+            <span class="text-[9px] font-black uppercase mt-1 tracking-tighter text-gray-400">Bag</span>
+        </div>
+    </nav>
+
     <script>
-        // --- DATA ---
+        let cart = [];
         const categories = [
-            { id: 1, name: 'Pizza', icon: 'pizza', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500' },
-            { id: 2, name: 'Burger', icon: 'sandwich', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500' },
-            { id: 3, name: 'Shawarma', icon: 'flame', img: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500' },
-            { id: 4, name: 'Pasta', icon: 'utensils', img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=500' },
-            { id: 5, name: 'Salads', icon: 'leaf', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500' },
-            { id: 6, name: 'Sandwich', icon: 'layers', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500' },
-            { id: 7, name: 'Chicken', icon: 'drumstick', img: 'https://images.unsplash.com/photo-1562967914-608f82629710?w=500' },
-            { id: 8, name: 'Snacks', icon: 'cookie', img: 'https://images.unsplash.com/photo-1599490659213-e2b9527bb087?w=500' },
-            { id: 9, name: 'Beverages', icon: 'cup-soda', img: 'https://images.unsplash.com/photo-1544145945-f904253d0c7b?w=500' },
-            { id: 10, name: 'Desserts', icon: 'ice-cream', img: 'https://images.unsplash.com/photo-1551024601-bec78acc704b?w=500' }
+            { name: "Biryani", id: "biryani", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400", price: 160 },
+            { name: "Pizza", id: "pizza", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", price: 199 },
+            { name: "Burger", id: "burger", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", price: 99 },
+            { name: "Momo", id: "momo", img: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b4?w=400", price: 80 },
+            { name: "Vada", id: "vada", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400", price: 40 }
         ];
 
-        const restaurants = [
-            { name: "Ajara Spice", cat: "Biryani & Tandoor", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400" },
-            { name: "The Burger Club", cat: "Burgers, Fries", img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400" },
-            { name: "Pizza Hut Ajara", cat: "Italian, Pizzas", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400" },
-            { name: "Royal Shawarma", cat: "Arabian Delight", img: "https://images.unsplash.com/photo-1662116765994-1e0e88966270?w=400" },
-            { name: "Sweet Tooth", cat: "Desserts, Cakes", img: "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400" }
-        ];
-
-        const dishes = [];
-        categories.forEach(cat => {
-            for(let i=1; i<=10; i++) {
-                dishes.push({
-                    id: `${cat.id}-${i}`,
-                    catId: cat.id,
-                    name: `${cat.name} Deluxe ${i}`,
-                    price: 150 + (i * 20),
-                    desc: "Authentic taste with fresh ingredients from Ajara farms.",
-                    img: cat.img
-                });
-            }
+        // Splash Hide Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const s = document.getElementById('splash');
+                s.style.opacity = '0';
+                setTimeout(() => s.style.display = 'none', 500);
+            }, 2500);
         });
 
-        let cart = [];
-        let discount = 0;
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('hidden'); }
 
-        // --- CORE FUNCTIONS ---
-        function init() {
-            renderRestaurants();
-            renderCategories();
-            updateCartCount();
-            lucide.createIcons();
-            loadProfile();
-        }
-
-        function renderRestaurants() {
-            const list = document.getElementById('restaurant-list');
-            restaurants.forEach(res => {
-                list.innerHTML += `
-                    <div class="min-w-[280px] bg-white p-3 rounded-3xl card-shadow cursor-pointer hover:scale-[1.02] transition">
-                        <img src="${res.img}" class="w-full h-40 object-cover rounded-2xl mb-3">
-                        <h3 class="font-bold">${res.name}</h3>
-                        <p class="text-xs text-gray-400">${res.cat}</p>
-                    </div>
-                `;
-            });
-        }
-
-        function renderCategories() {
-            const list = document.getElementById('category-list');
-            categories.forEach(cat => {
-                list.innerHTML += `
-                    <div onclick="showDishes(${cat.id}, '${cat.name}')" class="relative overflow-hidden h-48 rounded-3xl cursor-pointer group shadow-sm">
-                        <img src="${cat.img}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                            <div>
-                                <h3 class="text-white text-2xl font-extrabold">${cat.name}</h3>
-                                <p class="text-orange-400 text-sm font-bold">Explore Menu <i data-lucide="chevron-right" class="inline w-4 h-4"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            lucide.createIcons();
-        }
-
-        function showDishes(catId, name) {
-            document.getElementById('categories').classList.add('hidden');
-            document.getElementById('restaurants').classList.add('hidden');
-            document.getElementById('dishes-view').classList.remove('hidden');
-            document.getElementById('current-category-name').innerText = name;
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('page-active'));
+            document.getElementById(id).classList.add('page-active');
+            document.getElementById('sidebar').classList.add('hidden');
+            if(id === 'cart-page') updateCartUI();
             
-            const grid = document.getElementById('dishes-grid');
-            grid.innerHTML = '';
+            // Update bottom nav colors
+            const bagIcon = document.getElementById('nav-bag-icon');
+            if(id === 'cart-page') bagIcon.classList.replace('text-gray-300', 'text-orange-500');
+            else bagIcon.classList.replace('text-orange-500', 'text-gray-300');
             
-            dishes.filter(d => d.catId === catId).forEach(dish => {
-                grid.innerHTML += `
-                    <div class="bg-white p-4 rounded-3xl flex gap-4 card-shadow">
-                        <img src="${dish.img}" class="w-24 h-24 rounded-2xl object-cover">
-                        <div class="flex-1">
-                            <h4 class="font-bold text-lg">${dish.name}</h4>
-                            <p class="text-gray-400 text-xs mb-2">${dish.desc}</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-orange-600">₹${dish.price}</span>
-                                <button onclick="addToCart('${dish.id}')" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-bold">+ Add</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+            window.scrollTo(0,0);
         }
 
-        function hideDishes() {
-            document.getElementById('categories').classList.remove('hidden');
-            document.getElementById('restaurants').classList.remove('hidden');
-            document.getElementById('dishes-view').classList.add('hidden');
-        }
+        // Initialize Home UI
+        const grid = document.getElementById('category-grid');
+        categories.forEach(c => {
+            grid.innerHTML += `
+                <div class="flex flex-col items-center gap-3 cursor-pointer shrink-0" onclick="openMenu('${c.name}', '${c.id}', ${c.price})">
+                    <img src="${c.img}" class="cat-img">
+                    <span class="text-[10px] font-black uppercase italic tracking-tighter">${c.name}</span>
+                </div>`;
+        });
 
-        function addToCart(dishId) {
-            const dish = dishes.find(d => d.id === dishId);
-            const exists = cart.find(item => item.id === dishId);
-            if(exists) {
-                exists.qty++;
-            } else {
-                cart.push({...dish, qty: 1});
-            }
-            updateCart();
-            // Simple animation feedback
-            document.getElementById('cart-count').classList.add('scale-150');
-            setTimeout(() => document.getElementById('cart-count').classList.remove('scale-150'), 200);
-        }
+        const hotels = [
+            { name: "Spice Hub Ajara", r: "4.9", img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" },
+            { name: "The Royal Kitchen", r: "4.7", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600" }
+        ];
 
-        function updateCart() {
-            const list = document.getElementById('cart-items');
-            list.innerHTML = '';
-            let subtotal = 0;
-
-            cart.forEach(item => {
-                subtotal += (item.price * item.qty);
-                list.innerHTML += `
-                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-2xl">
-                        <div>
-                            <p class="font-bold text-sm">${item.name}</p>
-                            <p class="text-xs text-gray-400">₹${item.price} x ${item.qty}</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <button onclick="changeQty('${item.id}', -1)" class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">-</button>
-                            <span class="font-bold">${item.qty}</span>
-                            <button onclick="changeQty('${item.id}', 1)" class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">+</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            const delivery = subtotal > 0 ? (subtotal > 500 ? 0 : 20) : 0;
-            const total = (subtotal - discount) + delivery;
-
-            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
-            document.getElementById('cart-delivery').innerText = `₹${delivery}`;
-            document.getElementById('cart-total').innerText = `₹${total < 0 ? 0 : total}`;
-            updateCartCount();
-        }
-
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            item.qty += delta;
-            if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
-            updateCart();
-        }
-
-        function updateCartCount() {
-            const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('cart-count').innerText = count;
-        }
-
-        function applyCoupon() {
-            const code = document.getElementById('coupon-code').value.toUpperCase();
-            if(code === 'SAVE10') {
-           
+        const hList = document.getElementById('hotel-list');
+        hotels.forEach(h => {
+            hList.innerHTML += `
+                <div class="hotel-card relative h-64 rounded-[2.5rem] overflow-hidden shadow-xl cursor-pointer" onclick="openMenu('${h.name}', 'hotel', 120)">
+                    <img src="${h.img}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                        <h4 class="text-white text-2xl font-black italic uppercase tracking-tighter leading-none">${h.name}</h4>
+                        <div class="flex items-center gap-2 mt-2">
+                             <span class="bg-orange-500 text-white text-[9px] px-2 py-1 rounded-full font-black uppercase tracking-widest">⭐ ${h.r}</span>
+                             <span class="text-white/50 text-[9px] font-bold uppercase tracking-widest">30-40 MINS</span>
+      
